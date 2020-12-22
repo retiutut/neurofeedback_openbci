@@ -4,6 +4,7 @@ import brainflow
 import numpy as np
 import queue
 import time
+import os
 
 import pandas as pd
 import matplotlib
@@ -100,8 +101,8 @@ class Neural_Feedback:
         self.audio_start_time_sec = time.time()
         BoardShim.enable_dev_board_logger ()
         params = BrainFlowInputParams ()
-        params.serial_port = "/dev/ttyUSB0"
-        self.board_id = BoardIds.CYTON_DAISY_BOARD.value
+        params.serial_port = "COM4"
+        self.board_id = BoardIds.CYTON_BOARD.value
         self.sampling_rate = BoardShim.get_sampling_rate (self.board_id)
         self.board = BoardShim (self.board_id, params)
         self.player_is_playing = False
@@ -231,7 +232,7 @@ def get_protocol1():
     return result
 
 if __name__ == "__main__":
-    nf = Neural_Feedback("/home/romans/Downloads/THE SECRET To Negotiating In Business & Life TO ACHIEVE SUCCESS Chris Voss & Lewis Howes.mp4")
+    nf = Neural_Feedback(os.path.join("C:", "\\Users", "Retiutut", "Videos", "playtest_test1.mov"))
     nf.config_protocol(get_protocol1())
     nf.main()
     nf.dispose()
